@@ -1,0 +1,95 @@
+#!/usr/bin/env python3
+
+"""
+Parses screenshots of the game to get object metadata.
+Screenshots should be organized into separate directories based on in-game
+size (see SIZE_DIRS).
+Add KatamariDiary root to PYTHONPATH before running
+"""
+
+import json
+import os
+
+from PIL import Image
+from pytesseract import image_to_string
+
+from katamari_diary.log.log import logging
+from katamari_diary.models.KatamariObject import KatamariObject
+from katamari_diary.models.Size import Size
+
+CROP_BOX = (376, 676, 951, 1277)
+CROPPED_DIR = "cropped"
+INDENT = 4
+OUTPUT_NAME = "objects.json"
+SIZE_DIRS = (
+    "size00",
+    "size01",
+    "size02",
+    "size03",
+    "size04",
+    "size05",
+    "size06",
+    "size07",
+    "size08",
+    "size09",
+    "size10",
+    "size11",
+)
+
+
+def crop(path: str, box: tuple[int, int, int, int], output_path: str) -> None:
+    image = Image.open(path)
+    cropped = image.crop(box)
+    cropped_dir_path = os.path.join(os.path.dirname(path), CROPPED_DIR)
+    if not os.path.exists(cropped_dir_path):
+        os.makedirs(cropped_dir_path)
+    cropped.save(output_path)
+
+
+def parse(path: str, size: Size = Size.INVALID) -> KatamariObject:
+    img = Image.open(path)
+    lines = image_to_string(img).split("\n")
+    return KatamariObject(
+        name=lines[0],
+        size=size,
+        category=lines[1],
+        location=lines[2],
+        size_to_roll=lines[4],
+        description=" ".join(lines[6:]),
+    )
+
+
+def objs_to_json(objs: list[KatamariObject]) -> str:
+    return json.dumps({"objects": [obj.as_dict() for obj in objs]}, indent=INDENT)
+
+
+def main() -> None:
+    path = input("Path to screenshots: ")
+    objs = []
+
+    for i, size_dir in enumerate(SIZE_DIRS):
+        logging.info(f"Processing {size_dir}")
+        size_dir_abs = os.path.join(path, size_dir)
+        dir_items = os.listdir(size_dir_abs)
+
+        for j, file_name in enumerate(dir_items):
+            logging.info(f"Processing item {j + 1:>3}/{len(dir_items)}")
+            file_path = os.path.join(size_dir_abs, file_name)
+
+            if not os.path.isfile(file_path):
+                logging.warning(f"{file_name} is not a file. Skipping.")
+                continue
+
+            cropped_path = os.path.join(size_dir_abs, CROPPED_DIR, file_name)
+            if not os.path.exists(cropped_path):
+                logging.info(f"Cropping {file_name}")
+                crop(file_path, CROP_BOX, cropped_path)
+            obj = parse(cropped_path, size=Size(i + 1))
+            objs.append(obj)
+
+    with open(os.path.join(path, OUTPUT_NAME), "w+") as f:
+        f.write(objs_to_json(objs))
+
+
+if __name__ == "__main__":
+    main()

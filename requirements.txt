@@ -6,10 +6,14 @@ mypy==0.982
 mypy-extensions==0.4.3
 nodeenv==1.7.0
 packaging==21.3
+Pillow==9.2.0
 platformdirs==2.5.2
 pre-commit==2.20.0
+pyparsing==3.0.9
+pytesseract==0.3.10
 PyYAML==6.0
 toml==0.10.2
 tomli==2.0.1
+types-Pillow==9.2.2.2
 typing_extensions==4.4.0
 virtualenv==20.16.5
