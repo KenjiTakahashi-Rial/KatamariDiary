@@ -1,0 +1,28 @@
+syntax = "proto2";
+
+package katamari_diary;
+
+enum Size {
+  INVALID = 0;
+  THE_SMALLEST = 1;
+  EXTREMELY_SMALL = 2;
+  VERY_SMALL = 3;
+  SMALL = 4;
+  SOMEWHAT_SMALL = 5;
+  AVERAGE = 6;
+  ABOVE_AVERAGE = 7;
+  SOMEWHAT_LARGE = 8;
+  LARGE = 9;
+  VERY_LARGE = 10;
+  EXTREMELY_LARGE = 11;
+  THE_LARGEST = 12;
+}
+
+message KatamariObject {
+  optional string name = 1;
+  optional Size size = 2;
+  optional string category = 3;
+  optional string location = 4;
+  optional string size_to_roll = 5;
+  optional string description = 6;
+}

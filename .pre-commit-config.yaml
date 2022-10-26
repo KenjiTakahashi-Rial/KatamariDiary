@@ -32,5 +32,8 @@ repos:
     rev: v0.982
     hooks:
       - id: mypy
+        pass_filenames: false
+        args: []
         additional_dependencies:
           - types-Pillow==9.2.2.2
+          - types-protobuf==3.20.4.2

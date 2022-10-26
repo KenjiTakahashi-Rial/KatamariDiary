@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+CONFIG_PATH="config/protobuf"
+MODELS_PATH="katamari_diary/models"
+STUBS_PATH="katamari_diary/stubs"
+
+# Use project root as working directory
+cd "$(dirname -- "$0";)/.." || exit 1
+
+protoc \
+  --proto_path=$CONFIG_PATH \
+  --python_out=$MODELS_PATH \
+  --mypy_out=$STUBS_PATH/$MODELS_PATH \
+  $CONFIG_PATH/*.proto

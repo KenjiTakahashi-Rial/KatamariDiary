@@ -7,20 +7,21 @@ size (see SIZE_DIRS).
 Add KatamariDiary root to PYTHONPATH before running
 """
 
-import json
 import os
 
 from PIL import Image
 from pytesseract import image_to_string
 
 from katamari_diary.log.log import logging
-from katamari_diary.models.KatamariObject import KatamariObject
-from katamari_diary.models.Size import Size
+from katamari_diary.models.katamari_object_pb2 import KatamariObject
+from katamari_diary.models.katamari_object_pb2 import Size
+
 
 CROP_BOX = (376, 676, 951, 1277)
 CROPPED_DIR = "cropped"
 INDENT = 4
-OUTPUT_NAME = "objects.json"
+OUTPUT_DIR = "objects"
+OUTPUT_NAME_FORMAT = "{id:05d}.protobuf.bin"
 SIZE_DIRS = (
     "size00",
     "size01",
@@ -46,7 +47,7 @@ def crop(path: str, box: tuple[int, int, int, int], output_path: str) -> None:
     cropped.save(output_path)
 
 
-def parse(path: str, size: Size = Size.INVALID) -> KatamariObject:
+def parse(path: str, size: Size.ValueType = Size.INVALID) -> KatamariObject:
     img = Image.open(path)
     lines = image_to_string(img).split("\n")
     return KatamariObject(
@@ -59,13 +60,11 @@ def parse(path: str, size: Size = Size.INVALID) -> KatamariObject:
     )
 
 
-def objs_to_json(objs: list[KatamariObject]) -> str:
-    return json.dumps({"objects": [obj.as_dict() for obj in objs]}, indent=INDENT)
-
-
 def main() -> None:
     path = input("Path to screenshots: ")
-    objs = []
+    output_dir_path = os.path.join(path, OUTPUT_DIR)
+    if not os.path.exists(output_dir_path):
+        os.makedirs(output_dir_path)
 
     for i, size_dir in enumerate(SIZE_DIRS):
         logging.info(f"Processing {size_dir}")
@@ -84,11 +83,13 @@ def main() -> None:
             if not os.path.exists(cropped_path):
                 logging.info(f"Cropping {file_name}")
                 crop(file_path, CROP_BOX, cropped_path)
-            obj = parse(cropped_path, size=Size(i + 1))
-            objs.append(obj)
 
-    with open(os.path.join(path, OUTPUT_NAME), "w+") as f:
-        f.write(objs_to_json(objs))
+            obj = parse(cropped_path, size=Size.ValueType(i + 1))
+            output_name = OUTPUT_NAME_FORMAT.format(id=i * 1000 + j)
+
+            with open(os.path.join(output_dir_path, output_name), "wb+") as f:
+                f.write(obj.SerializeToString())
+            break
 
 
 if __name__ == "__main__":
