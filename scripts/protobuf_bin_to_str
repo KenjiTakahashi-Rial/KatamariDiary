@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+
+"""
+Converts protobuf binaries to text.
+Add KatamariDiary root to PYTHONPATH before running.
+"""
+
+import os
+import sys
+from pathlib import PurePath
+
+from google.protobuf.message import DecodeError
+
+from katamari_diary.log.log import logging
+from katamari_diary.models.katamari_object_pb2 import KatamariObject
+
+PROTOBUF_BINARY_SUFFIX = ".protobuf.bin"
+
+
+def list_dir_rec(path: str) -> list[str]:
+    items = []
+
+    for item in os.listdir(path):
+        item_path = os.path.join(path, item)
+        if os.path.isfile(item_path):
+            items.append(item)
+        elif os.path.isdir(item_path):
+            items += [os.path.join(item, i) for i in list_dir_rec(item_path)]
+
+    return items
+
+
+def main() -> None:
+    path = input("Path to protobuf binary/binaries: ")
+
+    files = []
+    if os.path.isfile(path):
+        files = [path]
+    elif os.path.isdir(path):
+        files = list_dir_rec(path)
+    else:
+        logging.error(f"{path} is not a file or directory.")
+        exit(1)
+
+    out_path = input("Output path: ")
+    if not os.path.exists(out_path):
+        os.makedirs(out_path, exist_ok=True)
+
+    for i, file in enumerate(files):
+        file_path = os.path.join(path, file)
+        logging.info(f"Processing item {i + 1:>4}/{len(files)}: {file_path}")
+
+        if not os.path.isfile(file_path):
+            logging.warning(f"{file_path} is not a file. Skipping.")
+            continue
+
+        txt_file = str(PurePath(file).with_suffix(".txt"))
+        txt_path = os.path.join(out_path, txt_file)
+        if os.path.exists(txt_path):
+            logging.warning(f"{txt_path} already exists. Skipping.")
+            continue
+
+        with open(file_path, "rb") as pb_f:
+            try:
+                obj = KatamariObject()
+                obj.ParseFromString(pb_f.read())
+            except DecodeError as e:
+                logging.warning(f"Failed to decode {file_path}: {e}. Skipping")
+                continue
+
+        with open(txt_path, "w") as txt_f:
+            txt_f.write(str(obj))
+            txt_f.write("\n")
+
+
+if __name__ == "__main__":
+    main()
