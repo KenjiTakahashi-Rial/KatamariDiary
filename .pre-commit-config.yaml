@@ -37,3 +37,8 @@ repos:
         additional_dependencies:
           - types-Pillow==9.2.2.2
           - types-protobuf==3.20.4.2
+
+  - repo: https://github.com/KenjiTakahashi-Rial/check-requirements
+    rev: 410897896f48827c5a7e040b5fad56b2a7194a47
+    hooks:
+      - id: check-requirements
