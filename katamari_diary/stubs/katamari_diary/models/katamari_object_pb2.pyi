@@ -16,13 +16,261 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+class _Category:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _CategoryEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Category.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    INVALID_CATEGORY: _Category.ValueType  # 0
+    DANGER: _Category.ValueType  # 1
+    GUIDANCE: _Category.ValueType  # 2
+    MEASURING: _Category.ValueType  # 3
+    CLEANING: _Category.ValueType  # 4
+    ROADWAYS: _Category.ValueType  # 5
+    ADVERTISING: _Category.ValueType  # 6
+    PARTITIONS: _Category.ValueType  # 7
+    STATIONARY: _Category.ValueType  # 8
+    POWERFUL: _Category.ValueType  # 9
+    GARDENING: _Category.ValueType  # 10
+    VEGETABLES: _Category.ValueType  # 11
+    PLAYGROUND: _Category.ValueType  # 12
+    POST: _Category.ValueType  # 13
+    ADULTS: _Category.ValueType  # 14
+    COUSINS: _Category.ValueType  # 15
+    ART: _Category.ValueType  # 16
+    ENTRANCES_AND_EXITS: _Category.ValueType  # 17
+    PLAYTIME: _Category.ValueType  # 18
+    SPORTS: _Category.ValueType  # 19
+    FARMING: _Category.ValueType  # 20
+    WORKERS: _Category.ValueType  # 21
+    CUTE: _Category.ValueType  # 22
+    FLOWERS: _Category.ValueType  # 23
+    CELEBRATION: _Category.ValueType  # 24
+    CONTAINERS: _Category.ValueType  # 25
+    JAPAN: _Category.ValueType  # 26
+    PLANTS: _Category.ValueType  # 27
+    GAMES: _Category.ValueType  # 28
+    JAPANESE_FOOD: _Category.ValueType  # 29
+    WEAPONS: _Category.ValueType  # 30
+    READING: _Category.ValueType  # 31
+    TRASH: _Category.ValueType  # 32
+    TOOLS: _Category.ValueType  # 33
+    SCHOOL: _Category.ValueType  # 34
+    COOKING: _Category.ValueType  # 35
+    DRINKS: _Category.ValueType  # 36
+    FOOD: _Category.ValueType  # 37
+    POLICE: _Category.ValueType  # 38
+    FASHION: _Category.ValueType  # 39
+    HEROES: _Category.ValueType  # 40
+    EVIL: _Category.ValueType  # 41
+    FESTIVAL: _Category.ValueType  # 42
+    FRUIT: _Category.ValueType  # 43
+    WINGS: _Category.ValueType  # 44
+    RICH: _Category.ValueType  # 45
+    LUGGAGE: _Category.ValueType  # 46
+    DECORATIONS: _Category.ValueType  # 47
+    HOUSES: _Category.ValueType  # 48
+    COMMUNICATION: _Category.ValueType  # 49
+    WHEELS: _Category.ValueType  # 50
+    FACILITIES: _Category.ValueType  # 51
+    STORES: _Category.ValueType  # 52
+    SYMBOLS: _Category.ValueType  # 53
+    ELECTRONICS: _Category.ValueType  # 54
+    ROMANCE: _Category.ValueType  # 55
+    WORK_VEHICLES: _Category.ValueType  # 56
+    TRANSPORT: _Category.ValueType  # 57
+    SUMMER: _Category.ValueType  # 58
+    NECESSITIES: _Category.ValueType  # 59
+    ANIMALS: _Category.ValueType  # 60
+    SNACKS: _Category.ValueType  # 61
+    SCIENCE: _Category.ValueType  # 62
+    ENERGY: _Category.ValueType  # 63
+    CONTROL: _Category.ValueType  # 64
+    RAIN: _Category.ValueType  # 65
+    SOUND: _Category.ValueType  # 66
+    LIGHTING: _Category.ValueType  # 67
+    AQUARIUM: _Category.ValueType  # 68
+    COLD: _Category.ValueType  # 69
+    FURNITURE: _Category.ValueType  # 70
+    SEATING: _Category.ValueType  # 71
+    CHILDREN: _Category.ValueType  # 72
+    VENDING_MACHINES: _Category.ValueType  # 73
+    HOT: _Category.ValueType  # 74
+    LIVESTOCK: _Category.ValueType  # 75
+    TEENAGERS: _Category.ValueType  # 76
+    FIERCE: _Category.ValueType  # 77
+    PROFESSIONALS: _Category.ValueType  # 78
+    NATURE: _Category.ValueType  # 79
+    INDUSTRY: _Category.ValueType  # 80
+
+class Category(_Category, metaclass=_CategoryEnumTypeWrapper): ...
+
+INVALID_CATEGORY: Category.ValueType  # 0
+DANGER: Category.ValueType  # 1
+GUIDANCE: Category.ValueType  # 2
+MEASURING: Category.ValueType  # 3
+CLEANING: Category.ValueType  # 4
+ROADWAYS: Category.ValueType  # 5
+ADVERTISING: Category.ValueType  # 6
+PARTITIONS: Category.ValueType  # 7
+STATIONARY: Category.ValueType  # 8
+POWERFUL: Category.ValueType  # 9
+GARDENING: Category.ValueType  # 10
+VEGETABLES: Category.ValueType  # 11
+PLAYGROUND: Category.ValueType  # 12
+POST: Category.ValueType  # 13
+ADULTS: Category.ValueType  # 14
+COUSINS: Category.ValueType  # 15
+ART: Category.ValueType  # 16
+ENTRANCES_AND_EXITS: Category.ValueType  # 17
+PLAYTIME: Category.ValueType  # 18
+SPORTS: Category.ValueType  # 19
+FARMING: Category.ValueType  # 20
+WORKERS: Category.ValueType  # 21
+CUTE: Category.ValueType  # 22
+FLOWERS: Category.ValueType  # 23
+CELEBRATION: Category.ValueType  # 24
+CONTAINERS: Category.ValueType  # 25
+JAPAN: Category.ValueType  # 26
+PLANTS: Category.ValueType  # 27
+GAMES: Category.ValueType  # 28
+JAPANESE_FOOD: Category.ValueType  # 29
+WEAPONS: Category.ValueType  # 30
+READING: Category.ValueType  # 31
+TRASH: Category.ValueType  # 32
+TOOLS: Category.ValueType  # 33
+SCHOOL: Category.ValueType  # 34
+COOKING: Category.ValueType  # 35
+DRINKS: Category.ValueType  # 36
+FOOD: Category.ValueType  # 37
+POLICE: Category.ValueType  # 38
+FASHION: Category.ValueType  # 39
+HEROES: Category.ValueType  # 40
+EVIL: Category.ValueType  # 41
+FESTIVAL: Category.ValueType  # 42
+FRUIT: Category.ValueType  # 43
+WINGS: Category.ValueType  # 44
+RICH: Category.ValueType  # 45
+LUGGAGE: Category.ValueType  # 46
+DECORATIONS: Category.ValueType  # 47
+HOUSES: Category.ValueType  # 48
+COMMUNICATION: Category.ValueType  # 49
+WHEELS: Category.ValueType  # 50
+FACILITIES: Category.ValueType  # 51
+STORES: Category.ValueType  # 52
+SYMBOLS: Category.ValueType  # 53
+ELECTRONICS: Category.ValueType  # 54
+ROMANCE: Category.ValueType  # 55
+WORK_VEHICLES: Category.ValueType  # 56
+TRANSPORT: Category.ValueType  # 57
+SUMMER: Category.ValueType  # 58
+NECESSITIES: Category.ValueType  # 59
+ANIMALS: Category.ValueType  # 60
+SNACKS: Category.ValueType  # 61
+SCIENCE: Category.ValueType  # 62
+ENERGY: Category.ValueType  # 63
+CONTROL: Category.ValueType  # 64
+RAIN: Category.ValueType  # 65
+SOUND: Category.ValueType  # 66
+LIGHTING: Category.ValueType  # 67
+AQUARIUM: Category.ValueType  # 68
+COLD: Category.ValueType  # 69
+FURNITURE: Category.ValueType  # 70
+SEATING: Category.ValueType  # 71
+CHILDREN: Category.ValueType  # 72
+VENDING_MACHINES: Category.ValueType  # 73
+HOT: Category.ValueType  # 74
+LIVESTOCK: Category.ValueType  # 75
+TEENAGERS: Category.ValueType  # 76
+FIERCE: Category.ValueType  # 77
+PROFESSIONALS: Category.ValueType  # 78
+NATURE: Category.ValueType  # 79
+INDUSTRY: Category.ValueType  # 80
+global___Category = Category
+
+class _Location:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _LocationEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Location.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    INVALID_LOCATION: _Location.ValueType  # 0
+    LIVING_ROOM: _Location.ValueType  # 1
+    GARDEN_AND_PORCH: _Location.ValueType  # 2
+    N_PIGEON_ST: _Location.ValueType  # 3
+    ENTRY_HALL: _Location.ValueType  # 4
+    S_PIGEON_ST: _Location.ValueType  # 5
+    URCHIN_TOWN: _Location.ValueType  # 6
+    ROADWAY: _Location.ValueType  # 7
+    CONSTRUCTION_SITE: _Location.ValueType  # 8
+    DOLPHIN_CITY: _Location.ValueType  # 9
+    QUAIL_RIVER: _Location.ValueType  # 10
+    SHOPPING_STREET: _Location.ValueType  # 11
+    SEAGULL_PARK: _Location.ValueType  # 12
+    DOVE_LAKE: _Location.ValueType  # 13
+    KIDS_ROOM: _Location.ValueType  # 14
+    KITCHEN: _Location.ValueType  # 15
+    SPARROW_HILL: _Location.ValueType  # 16
+    CIRCUS: _Location.ValueType  # 17
+    HALLWAY: _Location.ValueType  # 18
+    ROOF: _Location.ValueType  # 19
+    PARADISE: _Location.ValueType  # 20
+    SEABREEZE_TOWN: _Location.ValueType  # 21
+    FISHING_PORT: _Location.ValueType  # 22
+    BIG_BLUE_SEA: _Location.ValueType  # 23
+    BASEBALL_FIELD: _Location.ValueType  # 24
+    SUNSHINE_BEACH: _Location.ValueType  # 25
+    SEASLUG_RANCH: _Location.ValueType  # 26
+    CAMPGROUND: _Location.ValueType  # 27
+    WHIRLPOOL_POINT: _Location.ValueType  # 28
+    MULLET_BAY: _Location.ValueType  # 29
+    KUROSHIO_POINT: _Location.ValueType  # 30
+    WHALE_CITY: _Location.ValueType  # 31
+
+class Location(_Location, metaclass=_LocationEnumTypeWrapper): ...
+
+INVALID_LOCATION: Location.ValueType  # 0
+LIVING_ROOM: Location.ValueType  # 1
+GARDEN_AND_PORCH: Location.ValueType  # 2
+N_PIGEON_ST: Location.ValueType  # 3
+ENTRY_HALL: Location.ValueType  # 4
+S_PIGEON_ST: Location.ValueType  # 5
+URCHIN_TOWN: Location.ValueType  # 6
+ROADWAY: Location.ValueType  # 7
+CONSTRUCTION_SITE: Location.ValueType  # 8
+DOLPHIN_CITY: Location.ValueType  # 9
+QUAIL_RIVER: Location.ValueType  # 10
+SHOPPING_STREET: Location.ValueType  # 11
+SEAGULL_PARK: Location.ValueType  # 12
+DOVE_LAKE: Location.ValueType  # 13
+KIDS_ROOM: Location.ValueType  # 14
+KITCHEN: Location.ValueType  # 15
+SPARROW_HILL: Location.ValueType  # 16
+CIRCUS: Location.ValueType  # 17
+HALLWAY: Location.ValueType  # 18
+ROOF: Location.ValueType  # 19
+PARADISE: Location.ValueType  # 20
+SEABREEZE_TOWN: Location.ValueType  # 21
+FISHING_PORT: Location.ValueType  # 22
+BIG_BLUE_SEA: Location.ValueType  # 23
+BASEBALL_FIELD: Location.ValueType  # 24
+SUNSHINE_BEACH: Location.ValueType  # 25
+SEASLUG_RANCH: Location.ValueType  # 26
+CAMPGROUND: Location.ValueType  # 27
+WHIRLPOOL_POINT: Location.ValueType  # 28
+MULLET_BAY: Location.ValueType  # 29
+KUROSHIO_POINT: Location.ValueType  # 30
+WHALE_CITY: Location.ValueType  # 31
+global___Location = Location
+
 class _Size:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
 class _SizeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Size.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    INVALID: _Size.ValueType  # 0
+    INVALID_SIZE: _Size.ValueType  # 0
     THE_SMALLEST: _Size.ValueType  # 1
     EXTREMELY_SMALL: _Size.ValueType  # 2
     VERY_SMALL: _Size.ValueType  # 3
@@ -38,7 +286,7 @@ class _SizeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeW
 
 class Size(_Size, metaclass=_SizeEnumTypeWrapper): ...
 
-INVALID: Size.ValueType  # 0
+INVALID_SIZE: Size.ValueType  # 0
 THE_SMALLEST: Size.ValueType  # 1
 EXTREMELY_SMALL: Size.ValueType  # 2
 VERY_SMALL: Size.ValueType  # 3
@@ -54,64 +302,159 @@ THE_LARGEST: Size.ValueType  # 12
 global___Size = Size
 
 @typing_extensions.final
+class LocalizedString(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ENGLISH_FIELD_NUMBER: builtins.int
+    JAPANESE_FIELD_NUMBER: builtins.int
+    FRENCH_FIELD_NUMBER: builtins.int
+    GERMAN_FIELD_NUMBER: builtins.int
+    ITALIAN_FIELD_NUMBER: builtins.int
+    SPANISH_FIELD_NUMBER: builtins.int
+    english: builtins.str
+    japanese: builtins.str
+    french: builtins.str
+    german: builtins.str
+    italian: builtins.str
+    spanish: builtins.str
+    def __init__(
+        self,
+        *,
+        english: builtins.str | None = ...,
+        japanese: builtins.str | None = ...,
+        french: builtins.str | None = ...,
+        german: builtins.str | None = ...,
+        italian: builtins.str | None = ...,
+        spanish: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["english", b"english", "french", b"french", "german", b"german", "italian", b"italian", "japanese", b"japanese", "spanish", b"spanish"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["english", b"english", "french", b"french", "german", b"german", "italian", b"italian", "japanese", b"japanese", "spanish", b"spanish"]) -> None: ...
+
+global___LocalizedString = LocalizedString
+
+@typing_extensions.final
+class CategoryString(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    VALUE_FIELD_NUMBER: builtins.int
+    STRING_FIELD_NUMBER: builtins.int
+    value: global___Category.ValueType
+    @property
+    def string(self) -> global___LocalizedString: ...
+    def __init__(
+        self,
+        *,
+        value: global___Category.ValueType | None = ...,
+        string: global___LocalizedString | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["string", b"string", "value", b"value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["string", b"string", "value", b"value"]) -> None: ...
+
+global___CategoryString = CategoryString
+
+@typing_extensions.final
+class LocationString(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    VALUE_FIELD_NUMBER: builtins.int
+    STRING_FIELD_NUMBER: builtins.int
+    value: global___Location.ValueType
+    @property
+    def string(self) -> global___LocalizedString: ...
+    def __init__(
+        self,
+        *,
+        value: global___Location.ValueType | None = ...,
+        string: global___LocalizedString | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["string", b"string", "value", b"value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["string", b"string", "value", b"value"]) -> None: ...
+
+global___LocationString = LocationString
+
+@typing_extensions.final
+class SizeString(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    VALUE_FIELD_NUMBER: builtins.int
+    STRING_FIELD_NUMBER: builtins.int
+    value: global___Size.ValueType
+    @property
+    def string(self) -> global___LocalizedString: ...
+    def __init__(
+        self,
+        *,
+        value: global___Size.ValueType | None = ...,
+        string: global___LocalizedString | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["string", b"string", "value", b"value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["string", b"string", "value", b"value"]) -> None: ...
+
+global___SizeString = SizeString
+
+@typing_extensions.final
 class KatamariObject(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     SIZE_FIELD_NUMBER: builtins.int
     CATEGORY_FIELD_NUMBER: builtins.int
     LOCATION_FIELD_NUMBER: builtins.int
     SIZE_TO_ROLL_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    RARE_FIELD_NUMBER: builtins.int
+    INTERNAL_NAME_FIELD_NUMBER: builtins.int
+    NAME_TAG_FIELD_NUMBER: builtins.int
+    UNIT_FIELD_NUMBER: builtins.int
+    IGNORES_HOLE_FIELD_NUMBER: builtins.int
+    VOLUME_FIELD_NUMBER: builtins.int
+    IS_COLLECTIBLE_FIELD_NUMBER: builtins.int
+    PICKUP_VOLUME_FIELD_NUMBER: builtins.int
+    PICKUP_VOLUME_PENALTY_FIELD_NUMBER: builtins.int
+    id: builtins.int
+    """KatamariDiary Internal"""
+    @property
+    def name(self) -> global___LocalizedString:
+        """Game Exposed"""
     size: global___Size.ValueType
-    category: builtins.str
-    location: builtins.str
+    category: global___Category.ValueType
+    location: global___Location.ValueType
     size_to_roll: builtins.str
-    description: builtins.str
+    @property
+    def description(self) -> global___LocalizedString: ...
+    rare: builtins.bool
+    internal_name: builtins.str
+    """Game Internal"""
+    name_tag: builtins.str
+    @property
+    def unit(self) -> global___LocalizedString: ...
+    ignores_hole: builtins.bool
+    volume: builtins.str
+    is_collectible: builtins.bool
+    pickup_volume: builtins.str
+    pickup_volume_penalty: builtins.str
     def __init__(
         self,
         *,
-        name: builtins.str | None = ...,
+        id: builtins.int | None = ...,
+        name: global___LocalizedString | None = ...,
         size: global___Size.ValueType | None = ...,
-        category: builtins.str | None = ...,
-        location: builtins.str | None = ...,
+        category: global___Category.ValueType | None = ...,
+        location: global___Location.ValueType | None = ...,
         size_to_roll: builtins.str | None = ...,
-        description: builtins.str | None = ...,
+        description: global___LocalizedString | None = ...,
+        rare: builtins.bool | None = ...,
+        internal_name: builtins.str | None = ...,
+        name_tag: builtins.str | None = ...,
+        unit: global___LocalizedString | None = ...,
+        ignores_hole: builtins.bool | None = ...,
+        volume: builtins.str | None = ...,
+        is_collectible: builtins.bool | None = ...,
+        pickup_volume: builtins.str | None = ...,
+        pickup_volume_penalty: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing_extensions.Literal[
-            "category",
-            b"category",
-            "description",
-            b"description",
-            "location",
-            b"location",
-            "name",
-            b"name",
-            "size",
-            b"size",
-            "size_to_roll",
-            b"size_to_roll",
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "category",
-            b"category",
-            "description",
-            b"description",
-            "location",
-            b"location",
-            "name",
-            b"name",
-            "size",
-            b"size",
-            "size_to_roll",
-            b"size_to_roll",
-        ],
-    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["category", b"category", "description", b"description", "id", b"id", "ignores_hole", b"ignores_hole", "internal_name", b"internal_name", "is_collectible", b"is_collectible", "location", b"location", "name", b"name", "name_tag", b"name_tag", "pickup_volume", b"pickup_volume", "pickup_volume_penalty", b"pickup_volume_penalty", "rare", b"rare", "size", b"size", "size_to_roll", b"size_to_roll", "unit", b"unit", "volume", b"volume"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["category", b"category", "description", b"description", "id", b"id", "ignores_hole", b"ignores_hole", "internal_name", b"internal_name", "is_collectible", b"is_collectible", "location", b"location", "name", b"name", "name_tag", b"name_tag", "pickup_volume", b"pickup_volume", "pickup_volume_penalty", b"pickup_volume_penalty", "rare", b"rare", "size", b"size", "size_to_roll", b"size_to_roll", "unit", b"unit", "volume", b"volume"]) -> None: ...
 
 global___KatamariObject = KatamariObject

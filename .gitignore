@@ -161,3 +161,6 @@ cython_debug/
 
 # GitEye
 /.project
+
+# Protobuf
+*_pb2.py*
