@@ -1,0 +1,113 @@
+#!/usr/bin/env python3
+
+"""
+Maps string IDs from the object dump to TEXT_ID in the string dump to get full object info.
+Writes the objects to protobuf after mapping.
+"""
+
+import csv
+import os
+from collections import defaultdict
+from typing import Any, Optional
+
+from katamari_diary.config.enum_maps import (
+    CATEGORY_ENUM_MAP,
+    LOCATION_ENUM_MAP,
+    SIZE_ENUM_MAP,
+)
+from katamari_diary.log.log import logging
+from katamari_diary.models.katamari_object_pb2 import (
+    Category,
+    CategoryString,
+    KatamariObject,
+    LocalizedString,
+    Location,
+    LocationString,
+    Size,
+    SizeString,
+)
+
+CONFIG_PATH = os.path.join("..", "katamari_diary", "config")
+ENUMS_PATH = os.path.join(CONFIG_PATH, "enums")
+OBJECTS_PATH = os.path.join(CONFIG_PATH, "objects")
+OPEN_MODE = "wb+"
+OUTPUT_EXTENSION = ".protobuf.bin"
+
+
+def read_csv(path: str) -> list[dict[str, str]]:
+    with open(path, "r") as f:
+        return list(csv.DictReader(f))
+
+
+def get_localized_str(str_id: str, str_map: dict[str, dict[str, str]]) -> Optional[LocalizedString]:
+    if not str_id:
+        return None
+    return LocalizedString(
+        english=str_map[str_id]["ENGLISH"],
+        japanese=str_map[str_id]["JAPANESE"],
+        french=str_map[str_id]["FRENCH"],
+        german=str_map[str_id]["GERMAN"],
+        italian=str_map[str_id]["ITALIAN"],
+        spanish=str_map[str_id]["SPANISH"],
+    )
+
+
+def process_objects(obj_dump: list[dict[str, str]], str_map: dict[str, dict[str, str]]) -> None:
+    for row in obj_dump:
+        obj = KatamariObject(
+            id=int(row["monoNameIndex"]),
+            name=get_localized_str(row["nameStrId"], str_map),
+            size=SIZE_ENUM_MAP[row["sizeStrId"]],
+            category=CATEGORY_ENUM_MAP[row["categoryStrId"]],
+            location=LOCATION_ENUM_MAP[row["locationStrId"]],
+            size_to_roll=row["pickupSize"],
+            description=get_localized_str(row["descriptionStrId"], str_map),
+            rare=True if row["isRare"] == "TRUE" else False,
+            internal_name=row["internalName"],
+            name_tag=row["nameTag"],
+            unit=get_localized_str(row["unitStrId"], str_map),
+            ignores_hole=True if row["ignoresHole"] == "TRUE" else False,
+            volume=row["volume"] if row["volume"] else None,
+            is_collectible=True if row["isCollectible"] == "TRUE" else False,
+            pickup_volume=row["pickupVolume"] if row["pickupVolume"] else None,
+            pickup_volume_penalty=row["pickupVolumePenalty"] if row["pickupVolumePenalty"] else None,
+        )
+
+        file_path = os.path.join(OBJECTS_PATH, str(obj.id) + OUTPUT_EXTENSION)
+        with open(file_path, OPEN_MODE) as f:
+            f.write(obj.SerializeToString())
+        logging.info(f"Processed object {obj.id}")
+
+
+def process_enums(str_map: dict[str, dict[str, str]]) -> None:
+    enums: dict[Any, tuple[Any, Any]] = {
+        Category: (CategoryString, CATEGORY_ENUM_MAP),
+        Location: (LocationString, LOCATION_ENUM_MAP),
+        Size: (SizeString, SIZE_ENUM_MAP),
+    }
+    for enum_type, (str_message, enum_map) in enums.items():
+        for str_id, enum_value in enum_map.items():
+            localized_str = get_localized_str(str_id, str_map)
+            enum_str = str_message(value=enum_value, string=localized_str)
+
+            enum_type_name = enum_type.DESCRIPTOR.name
+            enum_value_name = enum_type.Name(enum_value)
+            file_name = f"{enum_value}_{enum_value_name}{OUTPUT_EXTENSION}"
+            file_path = os.path.join(ENUMS_PATH, enum_type_name, file_name)
+            with open(file_path, OPEN_MODE) as f:
+                f.write(enum_str.SerializeToString())
+            logging.info(f"Processed enum {enum_type_name}.{enum_value_name} ({enum_value})")
+
+
+def main() -> None:
+    obj_dump_path = input("Enter path to object dump CSV: ")
+    obj_dump = read_csv(obj_dump_path)
+    str_dump_path = input("Enter path to str dump CSV: ")
+    str_dump = read_csv(str_dump_path)
+    str_map = {row["TEXT_ID"]: row for row in str_dump}
+    process_objects(obj_dump, str_map)
+    process_enums(str_map)
+
+
+if __name__ == "__main__":
+    main()
