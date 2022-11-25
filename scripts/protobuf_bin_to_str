@@ -14,8 +14,6 @@ from google.protobuf.message import DecodeError
 from katamari_diary.log.log import logging
 from katamari_diary.models.katamari_object_pb2 import KatamariObject
 
-PROTOBUF_BINARY_SUFFIX = ".protobuf.bin"
-
 
 def list_dir_rec(path: str) -> list[str]:
     items = []

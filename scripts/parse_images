@@ -13,7 +13,13 @@ from PIL import Image
 from pytesseract import image_to_string
 
 from katamari_diary.log.log import logging
-from katamari_diary.models.katamari_object_pb2 import KatamariObject, Size
+from katamari_diary.models.katamari_object_pb2 import (
+    Category,
+    KatamariObject,
+    LocalizedString,
+    Location,
+    Size,
+)
 
 CROP_BOX = (376, 676, 951, 1277)
 CROPPED_DIR = "cropped"
@@ -44,16 +50,21 @@ def crop(path: str, box: tuple[int, int, int, int], output_path: str) -> None:
     cropped.save(output_path)
 
 
-def parse(path: str, size: Size.ValueType = Size.INVALID) -> KatamariObject:
+def parse(
+    path: str,
+    size: Size.ValueType = Size.INVALID_SIZE,
+    category: Category.ValueType = Category.INVALID_CATEGORY,
+    location: Location.ValueType = Location.INVALID_LOCATION,
+) -> KatamariObject:
     img = Image.open(path)
     lines = image_to_string(img).split("\n")
     return KatamariObject(
-        name=lines[0],
+        name=LocalizedString(english=lines[0]),
         size=size,
-        category=lines[1],
-        location=lines[2],
+        category=category,
+        location=location,
         size_to_roll=lines[4],
-        description=" ".join(lines[6:]),
+        description=LocalizedString(english=" ".join(lines[6:])),
     )
 
 

@@ -1,0 +1,186 @@
+syntax = "proto2";
+
+package katamari_diary;
+
+enum Category {
+  INVALID_CATEGORY = 0;
+  DANGER = 1;
+  GUIDANCE = 2;
+  MEASURING = 3;
+  CLEANING = 4;
+  ROADWAYS = 5;
+  ADVERTISING = 6;
+  PARTITIONS = 7;
+  STATIONARY = 8;
+  POWERFUL = 9;
+  GARDENING = 10;
+  VEGETABLES = 11;
+  PLAYGROUND = 12;
+  POST = 13;
+  ADULTS = 14;
+  COUSINS = 15;
+  ART = 16;
+  ENTRANCES_AND_EXITS = 17;
+  PLAYTIME = 18;
+  SPORTS = 19;
+  FARMING = 20;
+  WORKERS = 21;
+  CUTE = 22;
+  FLOWERS = 23;
+  CELEBRATION = 24;
+  CONTAINERS = 25;
+  JAPAN = 26;
+  PLANTS = 27;
+  GAMES = 28;
+  JAPANESE_FOOD = 29;
+  WEAPONS = 30;
+  READING = 31;
+  TRASH = 32;
+  TOOLS = 33;
+  SCHOOL = 34;
+  COOKING = 35;
+  DRINKS = 36;
+  FOOD = 37;
+  POLICE = 38;
+  FASHION = 39;
+  HEROES = 40;
+  EVIL = 41;
+  FESTIVAL = 42;
+  FRUIT = 43;
+  WINGS = 44;
+  RICH = 45;
+  LUGGAGE = 46;
+  DECORATIONS = 47;
+  HOUSES = 48;
+  COMMUNICATION = 49;
+  WHEELS = 50;
+  FACILITIES = 51;
+  STORES = 52;
+  SYMBOLS = 53;
+  ELECTRONICS = 54;
+  ROMANCE = 55;
+  WORK_VEHICLES = 56;
+  TRANSPORT = 57;
+  SUMMER = 58;
+  NECESSITIES = 59;
+  ANIMALS = 60;
+  SNACKS = 61;
+  SCIENCE = 62;
+  ENERGY = 63;
+  CONTROL = 64;
+  RAIN = 65;
+  SOUND = 66;
+  LIGHTING = 67;
+  AQUARIUM = 68;
+  COLD = 69;
+  FURNITURE = 70;
+  SEATING = 71;
+  CHILDREN = 72;
+  VENDING_MACHINES = 73;
+  HOT = 74;
+  LIVESTOCK = 75;
+  TEENAGERS = 76;
+  FIERCE = 77;
+  PROFESSIONALS = 78;
+  NATURE = 79;
+  INDUSTRY = 80;
+}
+
+enum Location {
+  INVALID_LOCATION = 0;
+  LIVING_ROOM = 1;
+  GARDEN_AND_PORCH = 2;
+  N_PIGEON_ST = 3;
+  ENTRY_HALL = 4;
+  S_PIGEON_ST = 5;
+  URCHIN_TOWN = 6;
+  ROADWAY = 7;
+  CONSTRUCTION_SITE = 8;
+  DOLPHIN_CITY = 9;
+  QUAIL_RIVER = 10;
+  SHOPPING_STREET = 11;
+  SEAGULL_PARK = 12;
+  DOVE_LAKE = 13;
+  KIDS_ROOM = 14;
+  KITCHEN = 15;
+  SPARROW_HILL = 16;
+  CIRCUS = 17;
+  HALLWAY = 18;
+  ROOF = 19;
+  PARADISE = 20;
+  SEABREEZE_TOWN = 21;
+  FISHING_PORT = 22;
+  BIG_BLUE_SEA = 23;
+  BASEBALL_FIELD = 24;
+  SUNSHINE_BEACH = 25;
+  SEASLUG_RANCH = 26;
+  CAMPGROUND = 27;
+  WHIRLPOOL_POINT = 28;
+  MULLET_BAY = 29;
+  KUROSHIO_POINT = 30;
+  WHALE_CITY = 31;
+}
+
+enum Size {
+  INVALID_SIZE = 0;
+  THE_SMALLEST = 1;
+  EXTREMELY_SMALL = 2;
+  VERY_SMALL = 3;
+  SMALL = 4;
+  SOMEWHAT_SMALL = 5;
+  AVERAGE = 6;
+  ABOVE_AVERAGE = 7;
+  SOMEWHAT_LARGE = 8;
+  LARGE = 9;
+  VERY_LARGE = 10;
+  EXTREMELY_LARGE = 11;
+  THE_LARGEST = 12;
+}
+
+message LocalizedString {
+    optional string english = 1;
+    optional string japanese = 2;
+    optional string french = 3;
+    optional string german = 4;
+    optional string italian = 5;
+    optional string spanish = 6;
+}
+
+message CategoryString {
+  optional Category value = 1;
+  optional LocalizedString string = 2;
+}
+
+message LocationString {
+  optional Location value = 1;
+  optional LocalizedString string = 2;
+}
+
+message SizeString {
+  optional Size value = 1;
+  optional LocalizedString string = 2;
+}
+
+message KatamariObject {
+  // KatamariDiary Internal
+  optional uint32 id = 1;
+
+  // Game Exposed
+  optional LocalizedString name = 2;
+  optional Size size = 3;
+  optional Category category = 4;
+  optional Location location = 5;
+  optional string size_to_roll = 6;
+  optional LocalizedString description = 7;
+  optional bool rare = 8;
+
+  // Game Internal
+  optional string internal_name = 9;
+  optional string name_tag = 10;
+  optional LocalizedString unit = 11;
+  optional bool ignores_hole = 12;
+  optional string volume = 13;
+  optional bool is_collectible = 14;
+  optional string pickup_volume = 15;
+  optional string pickup_volume_penalty = 16;
+}
